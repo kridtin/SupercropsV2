@@ -280,7 +280,6 @@ function Main() {
                         >
                           <Link href="/farm" style={{ width: '100%' }}>
                             <Button
-                              onClick={() => alert('hi')}
                               variant="outlined"
                               style={{ marginLeft: 'auto', width: '100%' }}
                             >

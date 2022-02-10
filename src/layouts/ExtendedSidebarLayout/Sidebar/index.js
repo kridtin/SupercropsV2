@@ -91,12 +91,6 @@ function Sidebar() {
           />
           <SidebarMenu />
         </Scrollbar>
-        <Divider
-          sx={{
-            background: theme.colors.alpha.trueWhite[10]
-          }}
-        />
-        <SidebarFooter />
       </SidebarWrapper>
       <Drawer
         sx={{
@@ -152,7 +146,6 @@ function Sidebar() {
             />
             <SidebarMenu />
           </Scrollbar>
-          <SidebarFooter />
         </SidebarWrapper>
       </Drawer>
     </>

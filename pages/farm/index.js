@@ -135,7 +135,7 @@ export default function farm(props) {
                 style={{ display: 'flex', gap: '5px' }}
               >
                 <AgricultureIcon fontSize="small" />
-                {t('My Farm')}
+                {t('Dreams Tech Farm')}
               </Typography>
               <Typography variant="h6">
                 <Text color="success">Total number of station : </Text>
@@ -260,7 +260,7 @@ export default function farm(props) {
                             marginTop: '20px'
                           }}
                         >
-                          <Link href="/farm" style={{ width: '100%' }}>
+                          <Link href="/farm/station" style={{ width: '100%' }}>
                             <Button
                               variant="outlined"
                               style={{ marginLeft: 'auto', width: '100%' }}
