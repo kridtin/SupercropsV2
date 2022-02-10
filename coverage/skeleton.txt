@@ -1,0 +1,32 @@
+
+URL header
+1."/" => หน้า main
+2."/farm" => หน้า farm
+3."/farm/station" => หน้า station
+4."/farm/station/node" => หน้า node 
+
+page 
+    - main
+    - farm
+    - station
+    - node
+page content
+    - main
+        - header
+        - farm link
+    - farm
+        - header
+        - info
+        - station link
+    - station
+        - header
+        - info
+        - picture
+        - node
+    - node
+        - header
+        - info
+        - graph
+        - sensor
+        - relay
+        - controler
