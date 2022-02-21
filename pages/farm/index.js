@@ -106,7 +106,7 @@ export default function farm(props) {
           </Link>
           <Text>/</Text>
           <Link
-            href="/"
+            href="/farm"
             style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
           >
             <AgricultureIcon fontSize="small" />

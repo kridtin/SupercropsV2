@@ -1,12 +1,43 @@
 import { React, useState, useEffect } from 'react';
-
+import {
+  Box,
+  Card,
+  Container,
+  Button,
+  styled,
+  Divider,
+  Typography,
+  CardActionArea,
+  alpha,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Table,
+  TableContainer,
+  IconButton,
+  useTheme
+} from '@mui/material';
+import { Grid } from '@mui/material';
+import Head from 'next/head';
+import PageTitleWrapper from 'src/components/PageTitleWrapper';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import HouseIcon from '@mui/icons-material/House';
+import CabinIcon from '@mui/icons-material/Cabin';
+import Text from 'src/components/Text';
 import { Authenticated } from 'src/components/Authenticated';
 import ExtendedSidebarLayout from 'src/layouts/ExtendedSidebarLayout';
+import NodeBox from '../../../src/content/station/NodeBox';
+import Picture from '../../../src/content/station/Picture';
 import Link from 'src/components/Link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import ModeStandbyOutlinedIcon from '@mui/icons-material/ModeStandbyOutlined';
+import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import { useTranslation } from 'react-i18next';
 export default function station() {
+  const { t } = useTranslation();
   const router = useRouter();
   //const Data = router.query;
   const [stapopup, setstapopup] = useState(false);
@@ -75,254 +106,117 @@ export default function station() {
   }, []);
   return (
     <>
-      <div className="row">
-        <div className="x_panel">
-          <h2>
-            <i className="fa fa-home"></i> <Link href="/">หน้าหลัก</Link> /{' '}
-            <i className="fa fa-sitemap"></i> <Link href={`/farm`}>ฟาร์ม</Link>{' '}
-            / <i className="fa fa-cubes"></i>
-            <Link href={`/station`}>โรงเรือน</Link>
-          </h2>
-        </div>
-      </div>
-      <div className="row">
-        <div className="x_panel">
-          <div
-            className="col-md-2 col-sm-4  tile_stats_count"
-            style={{ minWidth: '300px', marginLeft: '-10px' }}
-          >
-            <span className="count_top">
-              <h2>
-                <strong className="farmname">โรงเรือน</strong>
-              </h2>
-              <h2>
-                <i className="fa fa-dot-circle-o"></i> จำนวนโหนด
-              </h2>
-            </span>
-            <div className="count">
-              <h3>{nodeList.length}</h3>
-            </div>
-            <span className="count_bottom"></span>
-          </div>
-        </div>
-      </div>
-      <div
-        className="row"
-        style={{
-          overflow: 'hidden'
-        }}
-      >
-        <div
-          className="x_panel"
+      <Head>
+        <title>SuperCrops</title>
+      </Head>
+      <PageTitleWrapper>
+        <Box
           style={{
+            display: 'flex',
+            gap: '5px',
             alignItems: 'center',
-            justifyContent: 'center',
-            display: 'flex'
+            fontWeight: 'bold'
           }}
         >
-          <div style={{ position: 'relative' }}>
-            <img
-              className="embed-responsive embed-responsive-16by9"
-              src="/station-demo.png"
-              style={{ maxWidth: '1200px', borderRadius: '2px' }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                right: '0px',
-                bottom: '0px'
-              }}
-            >
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => setstapopup(!stapopup)}
+          <Link
+            href="/"
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+          >
+            <HouseIcon fontSize="small" />
+            <Text color="primary" style={{ fontSize: '18px' }}>
+              Main
+            </Text>
+          </Link>
+          <Text>/</Text>
+          <Link
+            href="/farm"
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+          >
+            <AgricultureIcon fontSize="small" />
+            <Text color="primary" style={{ fontSize: '18px' }}>
+              Farm
+            </Text>
+          </Link>
+          <Text>/</Text>
+          <Link
+            href="/farm/station"
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+          >
+            <CabinIcon fontSize="small" />
+            <Text color="primary" style={{ fontSize: '18px' }}>
+              Station
+            </Text>
+          </Link>
+          <Text>/</Text>
+        </Box>
+      </PageTitleWrapper>
+      <Grid
+        sx={{
+          px: 4
+        }}
+        container
+        direction="row"
+        alignItems="stretch"
+        spacing={0}
+      >
+        <Grid item xs={12} md={12} xl={12} style={{ padding: '10px' }}>
+          <Card style={{ marginBottom: '20px' }}>
+            <Grid style={{ padding: '20px' }}>
+              <Typography
+                gutterBottom
+                variant="h4"
+                style={{ display: 'flex', gap: '5px' }}
               >
-                <i className="fa fa-info-circle"></i> รายละเอียด
-              </button>
-            </div>
-            <div
-              id="stationID"
-              className="x_panel"
-              style={
-                stapopup
-                  ? {
-                      minWidth: '200px',
-                      width: '250px',
-                      position: 'absolute',
-                      right: '5px',
-                      bottom: '35px',
-                      borderRadius: '4px'
-                    }
-                  : { display: 'none' }
-              }
-            >
-              <ul className="list-unstyled">
-                <li>
-                  <strong>
-                    <i className="fa fa-tag"></i> ชื่อ :
-                  </strong>{' '}
-                  {station.name}{' '}
-                </li>
-                <li>
-                  <strong>
-                    <i className="fa fa-rss"></i> รหัส :{' '}
-                  </strong>{' '}
-                  {station.stationID}
-                </li>
-                <li>
-                  <strong>
-                    <i className="fa fa-cloud"></i> เกทเวย์ :{' '}
-                  </strong>{' '}
-                  {station.gateway ? 'เปิด' : 'ปิด'}
-                </li>
-                <li>
-                  <strong>
-                    <i className="fa fa-line-chart"></i> การวิเคราะห์ :{' '}
-                  </strong>{' '}
-                  {station.analytic ? 'เปิด' : 'ปิด'}
-                </li>
-                <li>
-                  <strong>
-                    <i className="fa fa-code-fork"></i> บล็อกเชนต์ :{' '}
-                  </strong>{' '}
-                  {station.blockchain ? 'เปิด' : 'ปิด'}
-                </li>
-                <li>
-                  <strong>
-                    <i className="fa fa-cube"></i> แพคเกจ :{' '}
-                  </strong>{' '}
-                  {station.package}
-                </li>
-                <li>
-                  <strong>
-                    <i className="fa fa-calendar"></i> วันที่สร้าง :{' '}
-                  </strong>{' '}
-                  {station.createDate}
-                </li>
-                <li>
-                  <strong>
-                    <i className="fa fa-calendar-o"></i> วันหมดอายุ :{' '}
-                  </strong>{' '}
-                  {station.expireDate}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="x_panel">
-          <div className="x_content">
-            <div>
-              <h2>
-                <i className="fa fa-dot-circle-o"></i> รายการโหนด
-              </h2>
-            </div>
-            <div
-              className="profile_details"
+                <CabinIcon fontSize="small" />
+                {station.name}
+              </Typography>
+              <Typography variant="h6">
+                <Text color="success">Total number of Node : </Text>
+                <Text color="primary" style={{ marginLeft: '5px' }}>
+                  {nodeList.length}{' '}
+                </Text>
+              </Typography>
+            </Grid>
+          </Card>
+          <Card style={{ marginBottom: '20px' }}>
+            {' '}
+            <Grid
+              container
+              spacing={0}
               style={{
-                display: 'flex',
-                gap: '40px',
-                maxWidth: '100%',
-                flexFlow: 'row wrap',
-                userSelect: 'none'
+                padding: '20px',
+                gridGap: '10px',
+                position: 'relative'
               }}
+            >
+              <Picture station={station} />{' '}
+            </Grid>
+          </Card>
+          <Card style={{ marginBottom: '20px' }}>
+            <Grid style={{ padding: '20px', marginBottom: '-20px' }}>
+              <Typography
+                gutterBottom
+                variant="h4"
+                style={{ display: 'flex', gap: '5px' }}
+              >
+                <AppsOutlinedIcon fontSize="small" />
+                {t('Node List')}
+              </Typography>
+            </Grid>
+            <Grid
+              container
+              spacing={0}
+              style={{ padding: '20px', gridGap: '10px' }}
             >
               {nodeList.map((node, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="well profile_view"
-                    style={{ width: '350px', minWidth: '300px' }}
-                  >
-                    <div className="col-sm-12">
-                      <label
-                        style={{
-                          position: 'absolute',
-                          top: '0',
-                          right: '20px'
-                        }}
-                      >
-                        <input
-                          id={'status'}
-                          type="checkbox"
-                          onClick={() => props.settest('test')}
-                          defaultChecked={node.status ? true : false}
-                          style={{
-                            width: '30px',
-                            height: '30px',
-                            display: 'block'
-                          }}
-                        />
-                        <span></span>
-                      </label>
-                      <div className="col-sm-12">
-                        <h4 className="brief">โหนดที่ {index + 1}</h4>
-                        <div className="left">
-                          <ul className="list-unstyled">
-                            <li>
-                              <h4>
-                                <strong>
-                                  <i className="fa fa-rss"></i> รหัส :{' '}
-                                </strong>{' '}
-                                {node.nodeID}
-                              </h4>
-                            </li>
-                          </ul>
-                          <ul className="list-unstyled">
-                            <li>
-                              <h4>
-                                <i className="fa fa-exchange"></i>{' '}
-                                <strong>สถานะ : </strong>{' '}
-                                {node.status ? 'ออนไลน์' : 'ออฟไลน์'}
-                              </h4>
-                            </li>
-                          </ul>
-                          <ul className="list-unstyled">
-                            <li>
-                              <h4>
-                                <i className="fa fa-calendar"></i>{' '}
-                                <strong>วันที่สร้าง : </strong>{' '}
-                                {node.createDate}
-                              </h4>
-                            </li>
-                          </ul>
-                          <ul className="list-unstyled">
-                            <li>
-                              <h4>
-                                <i className="fa fa-clock-o"></i>{' '}
-                                <strong>อัพเดตข้อมูล : </strong> ทุก{' '}
-                                {node.refreshTime}
-                              </h4>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div className=" bottom text-right">
-                      <div className=" col">
-                        <button
-                          style={{ marginBottom: '20px' }}
-                          type="button"
-                          className="btn btn-primary btn-sm"
-                          onClick={() => {
-                            router.push(`/node`);
-                            props.setnodeID(node.nodeID);
-                          }}
-                        >
-                          <i className="fa fa-eye"> </i> ดูข้อมูล
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <NodeBox key={'node' + index} nodeinfo={node} index={index} />
                 );
               })}
-            </div>
-          </div>
-        </div>
-      </div>
+            </Grid>
+          </Card>
+        </Grid>
+      </Grid>
     </>
   );
 }
