@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /coverage
+/backup
 
 # misc
 .DS_Store

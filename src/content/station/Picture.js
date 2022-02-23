@@ -30,7 +30,7 @@ export default function Picture(props) {
       <img
         className="embed-responsive embed-responsive-16by9"
         src="/station-demo.png"
-        style={{ minWidth: '200px', borderRadius: '2px' }}
+        style={{ minWidth: '200px', borderRadius: '2px', maxHeight: '600px' }}
       ></img>
       <Button
         variant="outlined"

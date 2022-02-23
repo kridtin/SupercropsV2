@@ -127,7 +127,7 @@ export default function NodeBox(props) {
               marginTop: '20px'
             }}
           >
-            <Link href="/farm/station" style={{ width: '100%' }}>
+            <Link href="/farm/station/node" style={{ width: '100%' }}>
               <Button
                 variant="outlined"
                 style={{ marginLeft: 'auto', width: '100%' }}

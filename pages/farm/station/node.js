@@ -1,3 +1,4 @@
+import { React, useState, useEffect } from 'react';
 import {
   Box,
   Card,
@@ -6,6 +7,7 @@ import {
   styled,
   Divider,
   Typography,
+  CardActionArea,
   alpha,
   TableHead,
   TableRow,
@@ -17,27 +19,26 @@ import {
   useTheme
 } from '@mui/material';
 import { Grid } from '@mui/material';
-import Text from 'src/components/Text';
-
-import Link from 'src/components/Link';
 import Head from 'next/head';
-
-import LanguageSwitcher from 'src/layouts/BoxedSidebarLayout/Header/Buttons/LanguageSwitcher';
-import Footer from 'src/components/Footer';
-
+import PageTitleWrapper from 'src/components/PageTitleWrapper';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import HouseIcon from '@mui/icons-material/House';
+import CabinIcon from '@mui/icons-material/Cabin';
+import Text from 'src/components/Text';
 import { Authenticated } from 'src/components/Authenticated';
 import ExtendedSidebarLayout from 'src/layouts/ExtendedSidebarLayout';
-
-import DashboardAnalyticsContent from 'src/content/DashboardPages/analytics';
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import NodeBox from '../../../src/content/station/NodeBox';
+import Picture from '../../../src/content/station/Picture';
+import Link from 'src/components/Link';
 import Image from 'next/image';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import axios from 'axios';
-import PageTitleWrapper from 'src/components/PageTitleWrapper';
+import ModeStandbyOutlinedIcon from '@mui/icons-material/ModeStandbyOutlined';
+import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import { useTranslation } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
 import { style } from '@mui/system';
+import Nodeinfo from '../../../src/content/node/Nodeinfo';
 
 function DashboardAnalytics() {
   const router = useRouter();
@@ -48,16 +49,58 @@ function DashboardAnalytics() {
   return (
     <>
       <Head>
-        <title>Node Dashboard</title>
+        <title>SuperCrops</title>
       </Head>
       <PageTitleWrapper>
-        <Link href="/">Main</Link>
-        {' / '}
-        <Link href="/">Farm</Link>
-        {' / '}
-        <Link href="/">Station</Link>
-        {' / '}
-        <Link href="/">Farm</Link>
+        <Box
+          style={{
+            display: 'flex',
+            gap: '5px',
+            alignItems: 'center',
+            fontWeight: 'bold'
+          }}
+        >
+          <Link
+            href="/"
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+          >
+            <HouseIcon fontSize="small" />
+            <Text color="primary" style={{ fontSize: '18px' }}>
+              Main
+            </Text>
+          </Link>
+          <Text>/</Text>
+          <Link
+            href="/farm"
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+          >
+            <AgricultureIcon fontSize="small" />
+            <Text color="primary" style={{ fontSize: '18px' }}>
+              Farm
+            </Text>
+          </Link>
+          <Text>/</Text>
+          <Link
+            href="/farm/station"
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+          >
+            <CabinIcon fontSize="small" />
+            <Text color="primary" style={{ fontSize: '18px' }}>
+              Station
+            </Text>
+          </Link>
+          <Text>/</Text>
+          <Link
+            href="/farm/station/node"
+            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+          >
+            <CabinIcon fontSize="small" />
+            <Text color="primary" style={{ fontSize: '18px' }}>
+              Node
+            </Text>
+          </Link>
+          <Text>/</Text>
+        </Box>
       </PageTitleWrapper>
       <Grid
         sx={{

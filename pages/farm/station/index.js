@@ -186,7 +186,9 @@ export default function station() {
               style={{
                 padding: '20px',
                 gridGap: '10px',
-                position: 'relative'
+                position: 'relative',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
               <Picture station={station} />{' '}
