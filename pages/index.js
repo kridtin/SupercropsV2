@@ -175,7 +175,7 @@ function Main() {
                 {t('My Farm')}
               </Typography>
               <Typography variant="h6">
-                <Text color="success">Total number of farms : </Text>
+                <Text>Total number of farms : </Text>
                 <Text color="primary" style={{ marginLeft: '5px' }}>
                   {farms.length}{' '}
                 </Text>

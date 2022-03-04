@@ -65,11 +65,7 @@ function Sidebar() {
               }}
             >
               <Image src="/supercropsico1.png" height="50px" width="50px" />
-              <Text
-                variant="h2"
-                color="white"
-                style={{ padding: '10px', fontSize: '18px' }}
-              >
+              <Text variant="h2" style={{ padding: '10px', fontSize: '18px' }}>
                 SuperCrops V2
               </Text>
             </Box>
@@ -122,7 +118,6 @@ function Sidebar() {
                 <Image src="/supercropsico1.png" height="50px" width="50px" />
                 <Text
                   variant="h2"
-                  color="white"
                   style={{ padding: '10px', fontSize: '18px' }}
                 >
                   SuperCrops V2

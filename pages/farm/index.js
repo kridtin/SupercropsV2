@@ -117,15 +117,7 @@ export default function farm(props) {
           <Text>/</Text>
         </Box>
       </PageTitleWrapper>
-      <Grid
-        sx={{
-          px: 4
-        }}
-        container
-        direction="row"
-        alignItems="stretch"
-        spacing={0}
-      >
+      <Grid container direction="row" alignItems="stretch" spacing={0}>
         <Grid item xs={12} md={12} xl={12} style={{ padding: '10px' }}>
           <Card>
             <Grid style={{ padding: '20px', marginBottom: '-20px' }}>
