@@ -53,6 +53,7 @@ export const settingActive = {
   gap: '10px',
   padding: '5px',
   borderRadius: '10px',
+  border: 'solid 1px #c4c4c4',
   flexDirection: 'column'
 };
 export const settingDeactive = {
@@ -205,7 +206,8 @@ export default function Relaydatasetting(props) {
     <Box
       sx={style}
       style={{
-        backgroundColor: !relay.dataFunction ? '#eaeaea' : ''
+        backgroundColor: !relay.dataFunction ? '#eaeaea' : '',
+        paddingTop: '5px'
       }}
     >
       <Typography style={{ display: 'flex', alignItems: 'center' }}>
@@ -239,7 +241,8 @@ export default function Relaydatasetting(props) {
                   alignItems: 'center',
                   gap: '10px',
                   padding: '5px',
-                  borderRadius: '10px'
+                  borderRadius: '10px',
+                  border: 'solid 1px #c4c4c4'
                 }
               : {
                   display: 'flex',
@@ -247,7 +250,8 @@ export default function Relaydatasetting(props) {
                   gap: '10px',
                   padding: '5px',
                   borderRadius: '10px',
-                  backgroundColor: '#eaeaea'
+                  backgroundColor: '#eaeaea',
+                  border: 'solid 1px #c4c4c4'
                 }
           }
         >

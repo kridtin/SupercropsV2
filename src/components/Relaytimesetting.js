@@ -480,7 +480,8 @@ export default function Relaytimesetting(props) {
     <Box
       sx={style}
       style={{
-        backgroundColor: !relay.timeFunction ? '#eaeaea' : ''
+        backgroundColor: !relay.timeFunction ? '#eaeaea' : '',
+        paddingTop: '5px'
       }}
     >
       <Typography style={{ display: 'flex', alignItems: 'center' }}>
