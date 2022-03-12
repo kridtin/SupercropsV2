@@ -7,6 +7,7 @@ import {
   styled,
   Divider,
   Typography,
+  CardHeader,
   CardActionArea,
   alpha,
   TableHead,
@@ -19,8 +20,12 @@ import {
   useTheme,
   Menu,
   MenuItem,
+  CardContent,
+  List,
+  Tabs,
   Grid,
-  Avatar
+  Avatar,
+  Tab
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
@@ -38,8 +43,37 @@ import CountUp from 'react-countup';
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 import AddLocationTwoToneIcon from '@mui/icons-material/AddLocationTwoTone';
 import AddBusinessTwoToneIcon from '@mui/icons-material/AddBusinessTwoTone';
-
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Link from 'src/components/Link';
+import TrafficSources from 'src/content/Dashboards/Analytics/TrafficSources';
+import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
+const TabsContainerWrapper = styled(CardContent)(
+  ({ theme }) => `
+      background-color: ${theme.colors.alpha.black[5]};
+`
+);
+const MenuWrapper = styled(Box)(
+  ({ theme }) => `
+  .MuiList-root {
+    padding: ${theme.spacing(1)};
+
+    & > .MuiList-root {
+      padding: 0 ${theme.spacing(0)} ${theme.spacing(1)};
+    }
+  }
+
+    .MuiListSubheader-root {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: ${theme.typography.pxToRem(12)};
+      color: ${theme.colors.alpha.trueWhite[50]};
+      padding: ${theme.spacing(0, 2.5)};
+      line-height: 1.4;
+    }
+`
+);
 const IconButtonWrapper = styled(IconButton)(
   ({ theme }) => `
     padding: ${theme.spacing(1.5)};
@@ -111,7 +145,7 @@ export function getSensorName(text) {
     return { name: 'Water Temperature', unit: '°C' };
   } else if (text == 'water_ph') {
     return { name: 'Water PH', unit: 'pH' };
-  } else if (text == 'water_o2') {
+  } else if (text == 'water_do') {
     return { name: 'Water o2', unit: 'mg/L' };
   } else if (text == 'water_ec') {
     return { name: 'Water EC', unit: 'uS/cm' };
@@ -217,263 +251,227 @@ export default function SensorBox(props) {
     }
   }
 
-  const [testColor, settestColor] = useState(theme.colors.primary.light);
-
+  const testZonedata = [
+    [
+      ['weather_temperature', 31.7],
+      ['weather_humidity', 51.1],
+      ['weather_light_lux', 0],
+      ['weather_co2', null],
+      ['weather_pm25', null],
+      ['weather_pm10', null],
+      ['weather_wind_direc', 135],
+      ['weather_wind_speed', 0],
+      ['weather_rain_gauge', null],
+      ['weather_pressure', null],
+      ['soil_temperature', 0],
+      ['soil_moisture', 0],
+      ['soil_ec', 0],
+      ['soil_ph', null],
+      ['soil_n', null],
+      ['soil_p', null],
+      ['soil_k', null],
+      ['water_temperature', 32.5],
+      ['water_ph', 5.3],
+      ['water_do', null],
+      ['water_ec', 0],
+      ['water_nh3', null],
+      ['water_cl', null],
+      ['water_nitrite', null],
+      ['water_turbidity', null]
+    ],
+    [
+      ['weather_temperature', 31.7],
+      ['weather_humidity', 51.1],
+      ['weather_light_lux', 0],
+      ['weather_co2', 0],
+      ['weather_pm25', 0],
+      ['weather_pm10', 0],
+      ['weather_wind_direc', 135],
+      ['weather_wind_speed', 0],
+      ['weather_rain_gauge', 0],
+      ['weather_pressure', 0],
+      ['soil_temperature', 0],
+      ['soil_moisture', 0],
+      ['soil_ec', 0],
+      ['soil_ph', 0],
+      ['soil_n', 0],
+      ['soil_p', 0],
+      ['soil_k', 0],
+      ['water_temperature', 32.5],
+      ['water_ph', 5.3],
+      ['water_do', 0],
+      ['water_ec', 0],
+      ['water_nh3', 0],
+      ['water_cl', 0],
+      ['water_nitrite', 0],
+      ['water_turbidity', 0]
+    ]
+  ];
+  const [currentZone, setcurrentZone] = useState(0);
+  const [dataShow, setdataShow] = useState(true);
+  const handleZonesChange = (_event, value) => {
+    setcurrentZone(value);
+  };
   return (
-    <Card>
-      <Box px={3} py={3}>
-        <div className="x_panel">
-          {zoneList.map((zone, index) => {
-            const zIndex = index + 1;
-
-            return (
-              <Grid
-                key={'zone' + index}
-                container
-                direction="row"
-                alignItems="stretch"
-                gap={3}
+    <>
+      <Card>
+        <CardHeader
+          action={
+            <IconButton onClick={() => setdataShow(!dataShow)}>
+              {dataShow ? (
+                <ArrowDropUpIcon color={'secondary'} />
+              ) : (
+                <ArrowDropDownIcon color={'secondary'} />
+              )}
+            </IconButton>
+          }
+          title={t('Data')}
+        />
+        {dataShow == true && (
+          <>
+            {' '}
+            <Divider />
+            <TabsContainerWrapper>
+              <Tabs
+                onChange={handleZonesChange}
+                value={currentZone}
+                variant="scrollable"
+                scrollButtons="auto"
+                textColor="primary"
+                indicatorColor="primary"
               >
-                <Grid item xs={12} xl={12} display={'flex'}>
-                  <Text>Zone {zIndex}</Text>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.blue1)}
-                  >
-                    blue1
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.blue2)}
-                  >
-                    blue2
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.blue3)}
-                  >
-                    blue3
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.blue4)}
-                  >
-                    blue4
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.blue5)}
-                  >
-                    blue5
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.orange1)}
-                  >
-                    orange1
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.orange2)}
-                  >
-                    orange2
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.orange3)}
-                  >
-                    orange3
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.purple1)}
-                  >
-                    purple1
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.purple3)}
-                  >
-                    purple3
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.pink1)}
-                  >
-                    pink1
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.pink2)}
-                  >
-                    pink2
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.green1)}
-                  >
-                    green1
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.green2)}
-                  >
-                    green2
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.black1)}
-                  >
-                    black1
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      ml: 1
-                    }}
-                    onClick={() => settestColor(theme.colors.gradients.black2)}
-                  >
-                    black2
-                  </Button>
-                  <Text style={{ marginLeft: 'auto' }}>0</Text>
-                </Grid>
+                {testZonedata.map((zone, index) => (
+                  <Tab
+                    key={'zone' + index}
+                    label={'Zone ' + (index + 1)}
+                    value={index}
+                  />
+                ))}
+              </Tabs>
+            </TabsContainerWrapper>
+            <Divider
+              sx={{
+                display: { xs: 'none', sm: 'flex' }
+              }}
+            />
+            <Box px={3} py={3}>
+              {testZonedata.map((zone, index) => {
+                const zIndex = index + 1;
+                //console.log(zoneList);
+                //console.log('zone index = ' + index);
+                //console.log('current zone = ' + currentZone);
 
-                <Grid container gap={1}>
-                  {zone.map((data, _index) => {
-                    const imgscr = sensoricon(data[0]);
-                    if (data[1] != null) {
-                      return (
-                        <Grid key={data[0]} item xs={12} sm={12} lg={2.8}>
-                          <Card
-                            sx={{
-                              p: 2.5,
-                              background: `${testColor}`
-                            }}
-                          >
-                            <Box
-                              pb={2}
-                              display="flex"
-                              alignItems="center"
-                              justifyContent="space-between"
-                            >
-                              <Box>
-                                <Typography
-                                  gutterBottom
-                                  component="div"
-                                  variant="caption"
-                                  sx={{
-                                    color: `${theme.colors.alpha.trueWhite[70]}`
-                                  }}
+                return (
+                  <CardContent key={'zone' + index}>
+                    {currentZone == index && (
+                      <Grid
+                        container
+                        direction="row"
+                        alignItems="stretch"
+                        gap={3}
+                      >
+                        <Grid container gap={1}>
+                          {zone.map((data, _index) => {
+                            const imgscr = sensoricon(data[0]);
+                            if (data[1] != null) {
+                              return (
+                                <Grid
+                                  key={data[0]}
+                                  item
+                                  xs={12}
+                                  sm={12}
+                                  lg={2.8}
                                 >
-                                  {t(getSensorName(data[0]).unit)}
-                                </Typography>
-                                <Typography
-                                  variant="h3"
-                                  sx={{
-                                    color: `${theme.colors.alpha.trueWhite[100]}`
-                                  }}
-                                >
-                                  {data[1]}
-                                </Typography>
-                              </Box>
-                              <Avatar
-                                variant="rounded"
-                                sx={{
-                                  width: `${theme.spacing(7)}`,
-                                  height: `${theme.spacing(7)}`,
-                                  background: `${alpha(
-                                    theme.colors.alpha.trueWhite[100],
-                                    0.2
-                                  )}`,
-                                  color: `${theme.colors.alpha.trueWhite[100]}`
-                                }}
-                              >
-                                <Avatar
-                                  sx={{
-                                    width: 64,
-                                    height: 64
-                                  }}
-                                  alt="Remy Sharp"
-                                  src={imgscr}
-                                />
-                              </Avatar>
-                            </Box>
-                            <Box display="flex" alignItems="center">
-                              <Typography
-                                variant="subtitle2"
-                                sx={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  pr: 0.5,
-                                  color: `${theme.colors.alpha.trueWhite[100]}`
-                                }}
-                              ></Typography>
-                              <Typography
-                                variant="subtitle2"
-                                noWrap
-                                sx={{
-                                  color: `${theme.colors.alpha.trueWhite[70]}`
-                                }}
-                              >
-                                {t(getSensorName(data[0]).name)}
-                              </Typography>
-                            </Box>
-                          </Card>
+                                  <Card
+                                    sx={{
+                                      p: 2.5,
+                                      background: `${theme.colors.primary.light}`
+                                    }}
+                                  >
+                                    <Box
+                                      pb={2}
+                                      display="flex"
+                                      alignItems="center"
+                                      justifyContent="space-between"
+                                    >
+                                      <Box>
+                                        <Typography
+                                          gutterBottom
+                                          component="div"
+                                          variant="caption"
+                                          sx={{
+                                            color: `${theme.colors.alpha.trueWhite[70]}`
+                                          }}
+                                        >
+                                          {t(getSensorName(data[0]).unit)}
+                                        </Typography>
+                                        <Typography
+                                          variant="h3"
+                                          sx={{
+                                            color: `${theme.colors.alpha.trueWhite[100]}`
+                                          }}
+                                        >
+                                          {data[1]}
+                                        </Typography>
+                                      </Box>
+                                      <Avatar
+                                        variant="rounded"
+                                        sx={{
+                                          width: `${theme.spacing(7)}`,
+                                          height: `${theme.spacing(7)}`,
+                                          background: `${alpha(
+                                            theme.colors.alpha.trueWhite[100],
+                                            0.2
+                                          )}`,
+                                          color: `${theme.colors.alpha.trueWhite[100]}`
+                                        }}
+                                      >
+                                        <Avatar
+                                          sx={{
+                                            width: 64,
+                                            height: 64
+                                          }}
+                                          alt="Remy Sharp"
+                                          src={imgscr}
+                                        />
+                                      </Avatar>
+                                    </Box>
+                                    <Box display="flex" alignItems="center">
+                                      <Typography
+                                        variant="subtitle2"
+                                        sx={{
+                                          display: 'flex',
+                                          alignItems: 'center',
+                                          pr: 0.5,
+                                          color: `${theme.colors.alpha.trueWhite[100]}`
+                                        }}
+                                      ></Typography>
+                                      <Typography
+                                        variant="subtitle2"
+                                        noWrap
+                                        sx={{
+                                          color: `${theme.colors.alpha.trueWhite[70]}`
+                                        }}
+                                      >
+                                        {t(getSensorName(data[0]).name)}
+                                      </Typography>
+                                    </Box>
+                                  </Card>
+                                </Grid>
+                              );
+                            }
+                          })}
+                          <Divider />
                         </Grid>
-                      );
-                    }
-                  })}
-                </Grid>
-              </Grid>
-            );
-          })}
-        </div>
-      </Box>
-    </Card>
+                      </Grid>
+                    )}
+                  </CardContent>
+                );
+              })}
+            </Box>
+          </>
+        )}
+      </Card>
+    </>
   );
 }

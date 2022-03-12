@@ -124,17 +124,18 @@ export default function NodeMenu(props) {
           alignItems: 'center'
         }}
       >
-        <DotLegend
-          style={
-            nodeInfo.status
-              ? {
-                  animation: `pulse 1s infinite`,
-                  background: `${theme.colors.success.light}`
-                }
-              : { background: `${theme.colors.secondary.lighter}` }
-          }
-        />
-
+        <Tooltip arrow title={t('Status')}>
+          <DotLegend
+            style={
+              nodeInfo.status
+                ? {
+                    animation: `pulse 1s infinite`,
+                    background: `${theme.colors.success.light}`
+                  }
+                : { background: `${theme.colors.secondary.lighter}` }
+            }
+          />
+        </Tooltip>
         <FormControl sx={{ mr: 1, ml: 1, minWidth: 80 }}>
           <InputLabel color="secondary" id="selectTime-label">
             Time
@@ -161,7 +162,6 @@ export default function NodeMenu(props) {
             </MenuItem>
           </Select>
         </FormControl>
-
         <Tooltip arrow title={t('Refresh Time: ') + getTimeText(reTime)}>
           <IconButtonWrapper
             variant="outlined"
@@ -173,10 +173,9 @@ export default function NodeMenu(props) {
               '&:hover': { background: `${theme.colors.secondary.lighter}` }
             }}
           >
-            <RestoreIcon />
+            <RestoreIcon color="secondary" />
           </IconButtonWrapper>
         </Tooltip>
-
         <Menu
           disableScrollLock
           anchorEl={actionRef1.current}
