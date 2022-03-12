@@ -409,6 +409,7 @@ export default function RelayComponent(props) {
         />
       </Modal>
       <CardDevice
+        variant="root"
         style={{ borderBottomLeftRadius: '0', borderBottomRightRadius: '0' }}
       >
         <CardActionArea>

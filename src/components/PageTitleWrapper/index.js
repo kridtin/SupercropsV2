@@ -3,7 +3,9 @@ import { Box, styled } from '@mui/material';
 
 const PageTitle = styled(Box)(
   ({ theme }) => `
-        padding: ${theme.spacing(4)};
+        padding: ${theme.spacing(2)};
+        height: 110px;
+        display: flex;
 `
 );
 

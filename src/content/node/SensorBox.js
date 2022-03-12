@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import {
   Box,
   Card,
@@ -217,6 +217,8 @@ export default function SensorBox(props) {
     }
   }
 
+  const [testColor, settestColor] = useState(theme.colors.primary.light);
+
   return (
     <Card>
       <Box px={3} py={3}>
@@ -234,8 +236,153 @@ export default function SensorBox(props) {
               >
                 <Grid item xs={12} xl={12} display={'flex'}>
                   <Text>Zone {zIndex}</Text>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.blue1)}
+                  >
+                    blue1
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.blue2)}
+                  >
+                    blue2
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.blue3)}
+                  >
+                    blue3
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.blue4)}
+                  >
+                    blue4
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.blue5)}
+                  >
+                    blue5
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.orange1)}
+                  >
+                    orange1
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.orange2)}
+                  >
+                    orange2
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.orange3)}
+                  >
+                    orange3
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.purple1)}
+                  >
+                    purple1
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.purple3)}
+                  >
+                    purple3
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.pink1)}
+                  >
+                    pink1
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.pink2)}
+                  >
+                    pink2
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.green1)}
+                  >
+                    green1
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.green2)}
+                  >
+                    green2
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.black1)}
+                  >
+                    black1
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
+                    onClick={() => settestColor(theme.colors.gradients.black2)}
+                  >
+                    black2
+                  </Button>
                   <Text style={{ marginLeft: 'auto' }}>0</Text>
                 </Grid>
+
                 <Grid container gap={1}>
                   {zone.map((data, _index) => {
                     const imgscr = sensoricon(data[0]);
@@ -245,7 +392,7 @@ export default function SensorBox(props) {
                           <Card
                             sx={{
                               p: 2.5,
-                              background: `${theme.colors.gradients.blue2}`
+                              background: `${testColor}`
                             }}
                           >
                             <Box

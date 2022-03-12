@@ -38,6 +38,8 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import CompassCalibrationIcon from '@mui/icons-material/CompassCalibration';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Text from 'src/components/Text';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { useTranslation } from 'react-i18next';
 export default function farm(props) {
@@ -90,31 +92,31 @@ export default function farm(props) {
         <Box
           style={{
             display: 'flex',
-            gap: '5px',
-            alignItems: 'center',
-            fontWeight: 'bold'
+            alignItems: 'center'
           }}
         >
-          <Link
-            href="/"
-            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
-          >
-            <HouseIcon fontSize="small" />
-            <Text color="primary" style={{ fontSize: '18px' }}>
+          <Button size="small" onClick={() => router.push('/')}>
+            <Text
+              color="secondary"
+              style={{ fontSize: '18px', fontWeight: 'normal' }}
+            >
               Main
             </Text>
-          </Link>
-          <Text>/</Text>
-          <Link
-            href="/farm"
+          </Button>
+          <ArrowForwardIosIcon fontSize="small" color="secondary" />
+          <Button
+            size="small"
             style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+            onClick={() => alert('test')}
           >
-            <AgricultureIcon fontSize="small" />
-            <Text color="primary" style={{ fontSize: '18px' }}>
+            <Text
+              color="secondary"
+              style={{ fontSize: '18px', fontWeight: 'bold' }}
+            >
               Farm
             </Text>
-          </Link>
-          <Text>/</Text>
+            <ArrowDropDownIcon color="secondary" />
+          </Button>
         </Box>
       </PageTitleWrapper>
       <Grid container direction="row" alignItems="stretch" spacing={0}>
@@ -130,7 +132,7 @@ export default function farm(props) {
                 {t('Dreams Tech Farm')}
               </Typography>
               <Typography variant="h6">
-                <Text color="success">Total number of station : </Text>
+                <Text color="secondary">Total number of station : </Text>
                 <Text color="primary" style={{ marginLeft: '5px' }}>
                   {stationList.length}{' '}
                 </Text>

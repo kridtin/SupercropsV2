@@ -39,6 +39,7 @@ import router from 'next/router';
 import axios from 'axios';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { useTranslation } from 'react-i18next';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import SpaIcon from '@mui/icons-material/Spa';
@@ -113,7 +114,7 @@ function Main() {
           farmId: farmid
         })
         .then((res, eror) => {
-          // setfarms([]);
+          setfarms([]);
           setfarms((farms) => [...farms, res.data]);
         });
     }
@@ -137,21 +138,19 @@ function Main() {
         <Box
           style={{
             display: 'flex',
-            gap: '5px',
             alignItems: 'center',
             fontWeight: 'bold'
           }}
         >
-          <Link
-            href="/"
+          <Button
+            size="small"
             style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
           >
-            <HouseIcon fontSize="small" />
-            <Text color="primary" style={{ fontSize: '18px' }}>
+            <Text color="secondary" style={{ fontSize: '18px' }}>
               Main
             </Text>
-          </Link>
-          <Text>/</Text>
+            <ArrowDropDownIcon color="secondary" />
+          </Button>
         </Box>
       </PageTitleWrapper>
       <Grid

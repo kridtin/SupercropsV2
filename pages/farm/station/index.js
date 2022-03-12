@@ -36,6 +36,9 @@ import axios from 'axios';
 import ModeStandbyOutlinedIcon from '@mui/icons-material/ModeStandbyOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useTranslation } from 'react-i18next';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 export default function station() {
   const { t } = useTranslation();
   const router = useRouter();
@@ -113,41 +116,33 @@ export default function station() {
         <Box
           style={{
             display: 'flex',
-            gap: '5px',
-            alignItems: 'center',
-            fontWeight: 'bold'
+            alignItems: 'center'
           }}
         >
-          <Link
-            href="/"
-            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
-          >
-            <HouseIcon fontSize="small" />
-            <Text color="primary" style={{ fontSize: '18px' }}>
+          <Button size="small" onClick={() => router.push('/')}>
+            <Text
+              color="secondary"
+              style={{ fontSize: '18px', fontWeight: 'normal' }}
+            >
               Main
             </Text>
-          </Link>
-          <Text>/</Text>
-          <Link
-            href="/farm"
-            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
-          >
-            <AgricultureIcon fontSize="small" />
-            <Text color="primary" style={{ fontSize: '18px' }}>
+          </Button>
+          <ArrowForwardIosIcon fontSize="small" color="secondary" />
+          <Button size="small" onClick={() => router.push('/farm')}>
+            <Text
+              color="secondary"
+              style={{ fontSize: '18px', fontWeight: 'normal' }}
+            >
               Farm
             </Text>
-          </Link>
-          <Text>/</Text>
-          <Link
-            href="/farm/station"
-            style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
-          >
-            <CabinIcon fontSize="small" />
-            <Text color="primary" style={{ fontSize: '18px' }}>
+          </Button>
+          <ArrowForwardIosIcon fontSize="small" color="secondary" />
+          <Button size="small" onClick={() => router.push('/farm/station')}>
+            <Text color="secondary" style={{ fontSize: '18px' }}>
               Station
             </Text>
-          </Link>
-          <Text>/</Text>
+            <ArrowDropDownIcon fontSize="small" color="secondary" />
+          </Button>
         </Box>
       </PageTitleWrapper>
       <Grid
@@ -171,7 +166,7 @@ export default function station() {
                 {station.name}
               </Typography>
               <Typography variant="h6">
-                <Text color="success">Total number of Node : </Text>
+                <Text color="secondary">Total number of Node : </Text>
                 <Text color="primary" style={{ marginLeft: '5px' }}>
                   {nodeList.length}{' '}
                 </Text>
