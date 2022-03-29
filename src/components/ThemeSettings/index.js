@@ -256,96 +256,6 @@ const ThemeSettings = () => {
             horizontal: 'right'
           }}
         >
-          <Box p={2}>
-            <Typography
-              sx={{
-                mb: 2,
-                textAlign: 'center',
-                fontWeight: 'bold',
-                textTransform: 'uppercase'
-              }}
-              variant="body1"
-            >
-              Layout Blueprints
-            </Typography>
-            <Button
-              fullWidth
-              size="large"
-              variant="outlined"
-              endIcon={<UnfoldMoreTwoToneIcon />}
-              color="primary"
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={openMenu}
-            >
-              Choose layout
-            </Button>
-            <Menu
-              disableScrollLock
-              anchorEl={anchorEl}
-              open={open}
-              onClose={closeMenu}
-              anchorOrigin={{
-                vertical: 'center',
-                horizontal: 'center'
-              }}
-              transformOrigin={{
-                vertical: 'center',
-                horizontal: 'center'
-              }}
-            >
-              <MenuItem
-                sx={{ fontWeight: 'bold' }}
-                component={Link}
-                href="/dashboards/reports"
-              >
-                Extended Sidebar
-              </MenuItem>
-              <MenuItem
-                sx={{ fontWeight: 'bold' }}
-                component={Link}
-                href="/blueprints/accent-header/dashboards/reports"
-              >
-                Accent Header
-              </MenuItem>
-              <MenuItem
-                sx={{ fontWeight: 'bold' }}
-                component={Link}
-                href="/blueprints/accent-sidebar/dashboards/reports"
-              >
-                Accent Sidebar
-              </MenuItem>
-              <MenuItem
-                sx={{ fontWeight: 'bold' }}
-                component={Link}
-                href="/blueprints/boxed-sidebar/dashboards/reports"
-              >
-                Boxed Sidebar
-              </MenuItem>
-              <MenuItem
-                sx={{ fontWeight: 'bold' }}
-                component={Link}
-                href="/blueprints/collapsed-sidebar/dashboards/reports"
-              >
-                Collapsed Sidebar
-              </MenuItem>
-              <MenuItem
-                sx={{ fontWeight: 'bold' }}
-                component={Link}
-                href="/blueprints/bottom-navigation/dashboards/reports"
-              >
-                Bottom Navigation
-              </MenuItem>
-              <MenuItem
-                sx={{ fontWeight: 'bold' }}
-                component={Link}
-                href="/blueprints/top-navigation/dashboards/reports"
-              >
-                Top Navigation
-              </MenuItem>
-            </Menu>
-          </Box>
-          <Divider />
           <Stack
             direction="row"
             divider={<Divider orientation="vertical" flexItem />}
@@ -361,7 +271,7 @@ const ThemeSettings = () => {
                 }}
                 variant="body1"
               >
-                Light color schemes
+                Light color theme
               </Typography>
               <Stack alignItems="center" spacing={2}>
                 <Tooltip placement="left" title="Pure Light" arrow>
@@ -431,7 +341,7 @@ const ThemeSettings = () => {
                 }}
                 variant="body1"
               >
-                Dark color schemes
+                Dark color theme
               </Typography>
               <Stack alignItems="center" spacing={2}>
                 <Tooltip placement="left" title="Nebula Fighter" arrow>

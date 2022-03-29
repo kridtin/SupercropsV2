@@ -15,6 +15,7 @@ import {
   Table,
   TableContainer,
   IconButton,
+  Input,
   useTheme
 } from '@mui/material';
 import { Grid } from '@mui/material';
@@ -47,6 +48,8 @@ import PlaceIcon from '@mui/icons-material/Place';
 import HouseIcon from '@mui/icons-material/House';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { padding } from '@mui/system';
+import ModeIcon from '@mui/icons-material/Mode';
+import SaveIcon from '@mui/icons-material/Save';
 
 function Main() {
   const router = useRouter();
@@ -54,6 +57,8 @@ function Main() {
   const [farms, setfarms] = useState([]);
   const { t } = useTranslation();
   const theme = useTheme();
+  const [editName, seteditName] = useState(false);
+  const [farmName, setfarmName] = useState('Farmname');
 
   const CardActionAreaWrapper = styled(CardActionArea)(
     ({ theme }) => `
@@ -165,14 +170,22 @@ function Main() {
         <Grid item xs={12} md={12} xl={12} style={{ padding: '10px' }}>
           <Card>
             <Grid style={{ padding: '20px', marginBottom: '-20px' }}>
-              <Typography
-                gutterBottom
-                variant="h4"
-                style={{ display: 'flex', gap: '5px' }}
+              <Box
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px'
+                }}
               >
-                <AccountTreeTwoToneIcon fontSize="small" />
-                {t('My Farm')}
-              </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  style={{ display: 'flex', gap: '5px' }}
+                >
+                  <AccountTreeTwoToneIcon fontSize="small" />
+                  <Text>{t('Farms')}</Text>
+                </Typography>
+              </Box>
               <Typography variant="h6">
                 <Text>Total number of farms : </Text>
                 <Text color="primary" style={{ marginLeft: '5px' }}>
@@ -212,17 +225,47 @@ function Main() {
                               marginBottom: '10px'
                             }}
                           >
-                            <AgricultureIcon fontSize="small" />
-                            <label>Farm {index + 1}</label>
+                            <Typography
+                              gutterBottom
+                              variant="h4"
+                              style={{ display: 'flex', gap: '5px' }}
+                            >
+                              <AgricultureIcon fontSize="small" />
+
+                              <Text color="warning">
+                                {t('Farm') + ' ' + (index + 1)}
+                              </Text>
+                            </Typography>
                           </Text>
                           <Typography
                             gutterBottom
                             variant="h4"
                             style={{
-                              marginBottom: '10px'
+                              marginBottom: '10px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '10px'
                             }}
                           >
-                            <Text color="error">{t(farm.name)}</Text>
+                            {editName ? (
+                              <Input
+                                color="warning"
+                                placeholder={farmName}
+                                fontSize="small"
+                                onChange={() => {
+                                  setfarmName(event.target.value);
+                                }}
+                              />
+                            ) : (
+                              <Text color="error">{t(farm.name)}</Text>
+                            )}
+                            <IconButton onClick={() => seteditName(!editName)}>
+                              {editName ? (
+                                <SaveIcon fontSize="small" />
+                              ) : (
+                                <ModeIcon fontSize="small" />
+                              )}
+                            </IconButton>
                           </Typography>
                           <Typography
                             variant="subtitle2"

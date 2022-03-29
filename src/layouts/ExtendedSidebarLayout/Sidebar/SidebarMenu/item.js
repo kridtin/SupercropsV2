@@ -2,20 +2,24 @@ import { useState, useContext } from 'react';
 import clsx from 'clsx';
 import { SidebarContext } from 'src/contexts/SidebarContext';
 import NextLink from 'next/link';
-
+import Link from 'src/components/Link';
 import PropTypes from 'prop-types';
 import {
   Button,
   Tooltip,
   Badge,
   Collapse,
+  useTheme,
   ListItem,
   styled,
-  tooltipClasses
+  IconButton,
+  tooltipClasses,
+  Box
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import ExpandLessTwoToneIcon from '@mui/icons-material/ExpandLessTwoTone';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+import { width } from '@mui/system';
 
 const TooltipWrapper = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -48,6 +52,7 @@ const SidebarMenuItem = ({
   const [menuToggle, setMenuToggle] = useState(openParent);
   const { t } = useTranslation();
   const { closeSidebar } = useContext(SidebarContext);
+  const theme = useTheme();
 
   const toggleMenu = () => {
     setMenuToggle((Open) => !Open);
@@ -57,28 +62,47 @@ const SidebarMenuItem = ({
     return (
       <ListItem component="div" className="Mui-children" key={name} {...rest}>
         <Button
+          width={'100%'}
+          style={{ display: 'flex' }}
           className={clsx({ 'Mui-active': menuToggle })}
           startIcon={Icon && <Icon />}
-          endIcon={
-            menuToggle ? <ExpandLessTwoToneIcon /> : <ExpandMoreTwoToneIcon />
-          }
-          onClick={toggleMenu}
         >
-          {badgeTooltip ? (
-            <TooltipWrapper title={badgeTooltip} arrow placement="right">
-              {badge === '' ? (
+          <NextLink href={link} passHref>
+            <Box>
+              {badgeTooltip ? (
+                <TooltipWrapper title={badgeTooltip} arrow placement="right">
+                  {badge === '' ? (
+                    <Badge color="primary" variant="dot" />
+                  ) : (
+                    <Badge badgeContent={badge} />
+                  )}
+                </TooltipWrapper>
+              ) : badge === '' ? (
                 <Badge color="primary" variant="dot" />
               ) : (
                 <Badge badgeContent={badge} />
               )}
-            </TooltipWrapper>
-          ) : badge === '' ? (
-            <Badge color="primary" variant="dot" />
+              {t(name)}
+            </Box>
+          </NextLink>
+
+          {menuToggle ? (
+            <ExpandLessTwoToneIcon
+              fontSize="small"
+              color="secondary"
+              onClick={toggleMenu}
+              style={{ marginLeft: 'auto' }}
+            />
           ) : (
-            <Badge badgeContent={badge} />
+            <ExpandMoreTwoToneIcon
+              fontSize="small"
+              color="secondary"
+              onClick={toggleMenu}
+              style={{ marginLeft: 'auto' }}
+            />
           )}
-          {t(name)}
         </Button>
+
         <Collapse in={menuToggle}>{children}</Collapse>
       </ListItem>
     );

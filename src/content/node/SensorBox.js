@@ -305,6 +305,33 @@ export default function SensorBox(props) {
       ['water_cl', 0],
       ['water_nitrite', 0],
       ['water_turbidity', 0]
+    ],
+    [
+      ['weather_temperature', 31.7],
+      ['weather_humidity', 51.1],
+      ['weather_light_lux', 0],
+      ['weather_co2', 0],
+      ['weather_pm25', 0],
+      ['weather_pm10', 0],
+      ['weather_wind_direc', 135],
+      ['weather_wind_speed', 0],
+      ['weather_rain_gauge', 0],
+      ['weather_pressure', 0],
+      ['soil_temperature', 0],
+      ['soil_moisture', 0],
+      ['soil_ec', 0],
+      ['soil_ph', 0],
+      ['soil_n', 0],
+      ['soil_p', 0],
+      ['soil_k', 0],
+      ['water_temperature', 32.5],
+      ['water_ph', 5.3],
+      ['water_do', 0],
+      ['water_ec', 0],
+      ['water_nh3', 0],
+      ['water_cl', 0],
+      ['water_nitrite', 0],
+      ['water_turbidity', 0]
     ]
   ];
   const [currentZone, setcurrentZone] = useState(0);
@@ -360,10 +387,9 @@ export default function SensorBox(props) {
                 //console.log(zoneList);
                 //console.log('zone index = ' + index);
                 //console.log('current zone = ' + currentZone);
-
-                return (
-                  <CardContent key={'zone' + index}>
-                    {currentZone == index && (
+                if (currentZone == index) {
+                  return (
+                    <CardContent key={'zone' + index}>
                       <Grid
                         container
                         direction="row"
@@ -464,9 +490,9 @@ export default function SensorBox(props) {
                           <Divider />
                         </Grid>
                       </Grid>
-                    )}
-                  </CardContent>
-                );
+                    </CardContent>
+                  );
+                }
               })}
             </Box>
           </>

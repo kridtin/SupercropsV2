@@ -48,11 +48,17 @@ const menuItems = [
       {
         name: 'Farm',
         icon: AgricultureIcon,
-        link: '/testpage',
+        link: '/',
         items: [
           {
             name: 'Farm 1',
-            link: '/farm?f=1'
+            link: '/farm?f=1',
+            items: [
+              {
+                name: 'Station 1',
+                link: 'farm/station?f=1&s=1'
+              }
+            ]
           },
           {
             name: 'Farm 2',

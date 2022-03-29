@@ -49,6 +49,7 @@ import { sensoricon } from '../../../../assets/sensoricon';
 import { isDatakeys } from '../../../../assets/isDatakeys';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Block1 from '../../../../src/content/Blocks/SparklinesLarge/Block1';
 
 import styles from '../../../../styles/node.module.scss';
 
@@ -298,7 +299,7 @@ function node() {
             <SensorBox zoneList={zoneList} />
           </Grid>
           <Grid item xs={12} xl={12}>
-            Graph
+            <Garph />
           </Grid>
         </Grid>
       </Grid>

@@ -19,6 +19,7 @@ import PieChartTwoToneIcon from '@mui/icons-material/PieChartTwoTone';
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
 import CountUp from 'react-countup';
 
+import axios from 'axios';
 const CardBorderBottom = styled(Card)(
   ({ theme }) => `
     border-bottom: transparent 5px solid;
@@ -146,6 +147,87 @@ export default function Garph() {
       data: [231, 442, 335, 227, 433, 222, 117, 316, 242, 252, 162, 176, 500]
     }
   ];
+
+  async function getGraphDataConfig(zoneindex, data, index, mode) {
+    const _orgID = 'Oc780373b0fa34391a5f987cc095f680a';
+    const zoneID = 'Z38df17286723448abd27f8866bba39b5';
+    const time1send =
+      parseInt(new Date().getTime() / 1000) - 2 * 30 * 24 * 60 * 60;
+    const time2send = parseInt(new Date().getTime() / 1000);
+    const reqdata = {
+      orgId: _orgID,
+      tsdbToken:
+        'YVTWev3u1OiqnX4rK7BUSExsYdHucUdCF6_90x4DgP_vHuIJjkh3Bi0XjqbUUwqln_KsLtnuS--8YqECk1C2SA==',
+      zoneId: zoneID,
+      graphData: 'weather_temperature',
+      time1: time1send,
+      time2: time2send
+    };
+    const _datapoint = await axios
+      .post(
+        `http://203.151.136.127:10002/api/tsdb/service/F184b91fec195443c829aaaebcdaeae16/N1f8003e446ef4e6eaacb06551796f412`,
+        reqdata
+      )
+      .catch((error) => {
+        if (error) {
+          console.log('tsdb requset error');
+          console.log(error);
+          console.log('time 2:' + parseInt(new Date().getTime() / 1000));
+          console.log(
+            'time 1 :' +
+              parseInt((new Date().getTime() - 96 * 60 * 60 * 1000) / 1000)
+          );
+        } else {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+    console.log(_datapoint);
+    /* let _garphData = {
+      labels: [],
+      datasets: [],
+      options: { zone: '', mode: '', time, data: '' }
+    };
+    let adata = {
+      label: '',
+      data: [],
+      id: '',
+      backgroundColor: colorHex,
+      borderColor: colorHex
+    };
+    console.log('datapoint');
+    console.log(_datapoint.data);
+    for (let i = 0; i < _datapoint.data.length; i++) {
+      const data = _datapoint.data[i];
+      const atime = new Date(data._time);
+      const btime = new Date(data._time).getTime();
+
+      const keys = Object.keys(data);
+      for (let i = 0; i < keys.length; i++) {
+        const akey = keys[i];
+        if (isDatakeys(akey)) {
+          adata.label = getTHsensor(akey).name;
+          adata.data.push(data[akey]);
+        }
+      }
+      _garphData.labels.push(btime);
+    }
+    let temp_state = graphDataList;
+    _garphData.id = temp_state[index].id;
+    _garphData.datasets.push(adata);
+    _garphData.options.zone = parseInt(zoneindex);
+    _garphData.options.mode = parseInt(mode);
+    _garphData.options.time = time;
+    _garphData.options.data = data;
+    console.log(_garphData);
+    temp_state[index] = _garphData;
+    props.setgarphDataList((graphDataList) => [...temp_state]);
+    localStorage.setItem('graphData', JSON.stringify(temp_state));
+
+    localStorage.setItem('graphData', JSON.stringify(graphDataList));*/
+  }
+
   return (
     <Card>
       <Box p={3}>
@@ -182,6 +264,7 @@ export default function Garph() {
       >
         <Button
           size="large"
+          onClick={() => getGraphDataConfig()}
           sx={{
             px: 2,
             transform: 'translateY(0px)',
