@@ -14,28 +14,6 @@ import HouseIcon from '@mui/icons-material/House';
 import PeopleIcon from '@mui/icons-material/People';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 
-const SideBar = [
-  {
-    heading: 'Farm',
-    items: [
-      {
-        name: 'Farm Name',
-        link: '/farm?fid=id',
-        items: [
-          {
-            name: 'Station Name',
-            items: [
-              {
-                name: 'node'
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-];
-
 const menuItems = [
   {
     heading: 'Menu',
@@ -56,7 +34,13 @@ const menuItems = [
             items: [
               {
                 name: 'Station 1',
-                link: 'farm/station?f=1&s=1'
+                link: '/farm/station?f=1&s=1',
+                items: [
+                  {
+                    name: 'Node 1',
+                    link: '/farm/station/node?f=1&s=1'
+                  }
+                ]
               }
             ]
           },

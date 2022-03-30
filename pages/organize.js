@@ -148,6 +148,7 @@ function Organize() {
             {user.map((val, index) => {
               return (
                 <div
+                  key={val.name + index}
                   className="well profile_view"
                   style={{ minWidth: '300px', width: '350px' }}
                 >
