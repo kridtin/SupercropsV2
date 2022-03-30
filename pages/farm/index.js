@@ -42,7 +42,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { useTranslation } from 'react-i18next';
-export default function farm(props) {
+export default function Farm(props) {
   const { t } = useTranslation();
   const router = useRouter();
   //const Data = router.query;
@@ -277,7 +277,7 @@ export default function farm(props) {
   );
 }
 
-farm.getLayout = (page) => (
+Farm.getLayout = (page) => (
   <Authenticated>
     <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
   </Authenticated>

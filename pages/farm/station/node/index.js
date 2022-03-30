@@ -55,7 +55,7 @@ import styles from '../../../../styles/node.module.scss';
 
 import NodeMenu from '../../../../src/components/NodeMenu';
 
-function node() {
+function Node() {
   const router = useRouter();
   const { t } = useTranslation();
   const theme = useTheme();
@@ -334,10 +334,10 @@ function node() {
   );
 }
 
-node.getLayout = (page) => (
+Node.getLayout = (page) => (
   <Authenticated>
     <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
   </Authenticated>
 );
 
-export default node;
+export default Node;

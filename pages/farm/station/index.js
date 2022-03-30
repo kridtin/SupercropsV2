@@ -39,7 +39,7 @@ import { useTranslation } from 'react-i18next';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-export default function station() {
+export default function Station() {
   const { t } = useTranslation();
   const router = useRouter();
   //const Data = router.query;
@@ -217,7 +217,7 @@ export default function station() {
     </>
   );
 }
-station.getLayout = (page) => (
+Station.getLayout = (page) => (
   <Authenticated>
     <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
   </Authenticated>

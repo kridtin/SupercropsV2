@@ -3,7 +3,7 @@ import { Authenticated } from 'src/components/Authenticated';
 import ExtendedSidebarLayout from 'src/layouts/ExtendedSidebarLayout';
 import styles from '../styles/organiz.module.scss';
 import Image from 'next/image';
-function organize() {
+function Organize() {
   const [user, setUser] = useState([
     {
       id: 'C7iXvxXl8yPFHABi',
@@ -368,10 +368,10 @@ function organize() {
     </div>
   );
 }
-organize.getLayout = (page) => (
+Organize.getLayout = (page) => (
   <Authenticated>
     <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
   </Authenticated>
 );
 
-export default organize;
+export default Organize;
