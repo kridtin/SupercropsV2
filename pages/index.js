@@ -183,7 +183,7 @@ function Main() {
                   style={{ display: 'flex', gap: '5px' }}
                 >
                   <AccountTreeTwoToneIcon fontSize="small" />
-                  <Text>{t('Farms')}</Text>
+                  <Text>{t('Farms Test vercel push')}</Text>
                 </Typography>
               </Box>
               <Typography variant="h6">
