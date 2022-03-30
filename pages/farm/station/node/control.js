@@ -34,7 +34,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import styles from '../../../../styles/node.module.scss';
-export default function control() {
+export default function Control() {
   const router = useRouter();
   const { t } = useTranslation();
   const theme = useTheme();
@@ -364,7 +364,7 @@ export default function control() {
     </>
   );
 }
-control.getLayout = (page) => (
+Control.getLayout = (page) => (
   <Authenticated>
     <ExtendedSidebarLayout>{page}</ExtendedSidebarLayout>
   </Authenticated>
