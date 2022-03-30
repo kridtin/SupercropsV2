@@ -252,33 +252,33 @@ function Organize() {
             <i className="fa fa-camera"> </i> เปลี่ยน
           </p>
           <div className={styles.modal_form}>
-            <label class="newuser-label">ชื่อ</label>
+            <label className="newuser-label">ชื่อ</label>
             <input
               id="reg_Username"
               type="text"
               className="form-control"
               required=""
             />
-            <label class="newuser-label">อีเมล</label>
+            <label className="newuser-label">อีเมล</label>
             <input
               id="reg_email"
               type="email"
               className="form-control"
               required=""
             />
-            <label class="newuser-label">รหัสผ่าน</label>
+            <label className="newuser-label">รหัสผ่าน</label>
             <input
               id="reg_pass"
               type="password"
               className="form-control"
               required=""
             />
-            <label class="newuser-label">สิทธิ์ผู้ใช้งาน</label>
+            <label className="newuser-label">สิทธิ์ผู้ใช้งาน</label>
             <select id="newUserrole">
-              <option class="newuser-label">---</option>
-              <option class="newuser-label">Admin</option>
-              <option class="newuser-label">Editor</option>
-              <option class="newuser-label">View</option>
+              <option className="newuser-label">---</option>
+              <option className="newuser-label">Admin</option>
+              <option className="newuser-label">Editor</option>
+              <option className="newuser-label">View</option>
             </select>
           </div>
           <div className={styles.modal_btn}>
@@ -317,33 +317,33 @@ function Organize() {
           </p>
           <input id="hiden_value" className={styles.hiden} />
           <div className={styles.modal_form}>
-            <label class="newuser-label">ชื่อ</label>
+            <label className="newuser-label">ชื่อ</label>
             <input
               id="modal_edit_username"
               type="text"
               className="form-control"
               required=""
             />
-            <label class="newuser-label">อีเมล</label>
+            <label className="newuser-label">อีเมล</label>
             <input
               id="reg_email"
               type="email"
               className="form-control"
               required=""
             />
-            <label class="newuser-label">รหัสผ่าน</label>
+            <label className="newuser-label">รหัสผ่าน</label>
             <input
               id="modal_edit_role"
               type="password"
               className="form-control"
               required=""
             />
-            <label class="newuser-label">สิทธิ์ผู้ใช้งาน</label>
+            <label className="newuser-label">สิทธิ์ผู้ใช้งาน</label>
             <select id="modal_edit_role">
-              <option class="newuser-label">---</option>
-              <option class="newuser-label">Admin</option>
-              <option class="newuser-label">Editor</option>
-              <option class="newuser-label">View</option>
+              <option className="newuser-label">---</option>
+              <option className="newuser-label">Admin</option>
+              <option className="newuser-label">Editor</option>
+              <option className="newuser-label">View</option>
             </select>
           </div>
           <div className={styles.modal_btn}>

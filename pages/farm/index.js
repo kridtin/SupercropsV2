@@ -16,6 +16,7 @@ import {
   Table,
   TableContainer,
   IconButton,
+  Input,
   useTheme
 } from '@mui/material';
 import { useRouter } from 'next/router';
@@ -42,6 +43,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import { useTranslation } from 'react-i18next';
+import ModeIcon from '@mui/icons-material/Mode';
+import SaveIcon from '@mui/icons-material/Save';
 export default function Farm(props) {
   const { t } = useTranslation();
   const router = useRouter();
@@ -49,6 +52,9 @@ export default function Farm(props) {
   const [stationID, setstationID] = useState([]);
   const [stationList, setstationList] = useState([]);
   const [farmList, setFarmList] = useState([1, 2, 3, 4, 5]);
+  const [editName, seteditName] = useState(false);
+  const [editName2, seteditName2] = useState(false);
+  const [name, setName] = useState('Farm Name');
   useEffect(async () => {
     const orgID = 'Oc780373b0fa34391a5f987cc095f680a'; //localStorage.getItem('_orgID');
     const farmID = 'F184b91fec195443c829aaaebcdaeae16'; //localStorage.getItem('_farmID');
@@ -126,10 +132,25 @@ export default function Farm(props) {
               <Typography
                 gutterBottom
                 variant="h4"
-                style={{ display: 'flex', gap: '5px' }}
+                style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
               >
                 <AgricultureIcon fontSize="small" />
-                {t('Dreams Tech Farm')}
+                {editName ? (
+                  <Input
+                    color="warning"
+                    placeholder={'Dreams Tech Farm'}
+                    fontSize="small"
+                  />
+                ) : (
+                  <Text>{t('Dreams Tech Farm')}</Text>
+                )}
+                <IconButton onClick={() => seteditName(!editName)}>
+                  {editName ? (
+                    <SaveIcon fontSize="small" />
+                  ) : (
+                    <ModeIcon fontSize="small" />
+                  )}
+                </IconButton>
               </Typography>
               <Typography variant="h6">
                 <Text color="secondary">Total number of station : </Text>
@@ -177,10 +198,29 @@ export default function Farm(props) {
                             gutterBottom
                             variant="h4"
                             style={{
-                              marginBottom: '10px'
+                              marginBottom: '10px',
+                              display: 'flex',
+                              alignItems: 'center'
                             }}
                           >
-                            <Text color="error">{t(station.name)}</Text>
+                            {editName2 ? (
+                              <Input
+                                color="error"
+                                placeholder={'Dreams Tech Farm'}
+                                fontSize="small"
+                              />
+                            ) : (
+                              <Text color="error">{t(station.name)}</Text>
+                            )}
+                            <IconButton
+                              onClick={() => seteditName2(!editName2)}
+                            >
+                              {editName2 ? (
+                                <SaveIcon fontSize="small" />
+                              ) : (
+                                <ModeIcon fontSize="small" />
+                              )}
+                            </IconButton>
                           </Typography>
                           <Typography
                             variant="subtitle2"
